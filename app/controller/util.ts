@@ -9,7 +9,7 @@ export default class UtilController extends Controller {
     const serverExpire = serverCaptcha.expire;
     // 2.获取客户端传递过来的验证码
     const { clientCode } = ctx.query;
-    console.log(serverCode, serverExpire, clientCode);//http://127.0.0.1:7001/verify?clientCode=1dee
+    console.log(serverCode, serverExpire, clientCode);// http://127.0.0.1:7001/verify?clientCode=1dee
     if (Date.now() > serverExpire) {
       ctx.body = '验证码已过期';
     } else if (serverCode !== clientCode) {
