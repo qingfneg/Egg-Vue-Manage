@@ -1,11 +1,6 @@
 import { EggPlugin } from 'egg';
 
 const plugin: EggPlugin = {
-  // static: true,
-  // nunjucks: {
-  //   enable: true,
-  //   package: 'egg-view-nunjucks',
-  // },
   // 开启sequelize
   sequelize: {
     enable: true,
@@ -16,6 +11,15 @@ const plugin: EggPlugin = {
   validate: {
     enable: true,
     package: 'egg-validate',
+  },
+  // 开启Redis存储
+  sessionRedis: {
+    enable: true,
+    package: 'egg-session-redis',
+  },
+  redis: {
+    enable: true,
+    package: 'egg-redis',
   },
 };
 
