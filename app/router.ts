@@ -4,8 +4,9 @@ export default (app: Application) => {
   const { controller, router } = app;
 
   router.get('/', controller.home.index);
-  router.get('/captcha', controller.util.imageCode);
-  router.get('/verify', controller.util.verifyImageCode);
+  router.get('/imageCode', controller.util.imageCode);
+  router.get('/emailCode', controller.util.emailCode);
+
   router.post('/register', controller.user.create);
 
 };
