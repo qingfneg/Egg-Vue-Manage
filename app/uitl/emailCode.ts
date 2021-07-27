@@ -19,7 +19,7 @@ export default {
     // 1.生成验证码
     const code = Math.random().toString(16).slice(2, 6)
       .toUpperCase();
-      // 2.生成发送内容
+    // 2.生成发送内容
     const info = {
       from: '601672784@qq.com', // 谁发的
       to, // 发给谁
@@ -49,9 +49,9 @@ export default {
 
 
   },
-  verifyImageCode(ctx, clientCode) {
+  verifyEmailCode(ctx, clientCode) {
     // 1.取出服务端中保存的验证码和过期时间
-    const serverCaptcha = ctx.session.captcha;
+    const serverCaptcha = ctx.session.email;
     let serverCode;
     let serverExpire;
     try {
@@ -59,23 +59,20 @@ export default {
       serverExpire = serverCaptcha.expire;
     } catch (e) {
       // 注意点: 验证码无论验证成功还是失败, 都只能使用一次
-      ctx.session.captcha = null;
-      throw new Error('清重新获取验证码');
+      ctx.session.email = null;
+      throw new Error('请重新获取验证码');
     }
     // 2.获取客户端传递过来的验证码
-    // console.log(serverCode, serverExpire, clientCode);// http://127.0.0.1:7001/verify?clientCode=1dee
     if (Date.now() > serverExpire) {
       // 注意点: 验证码无论验证成功还是失败, 都只能使用一次
-      ctx.session.captcha = null;
-      // ctx.body = '验证码已过期';
-      throw new Error('验证码已过期');
+      ctx.session.email = null;
+      throw new Error('验证码已经过期');
     } else if (serverCode !== clientCode) {
-
       // 注意点: 验证码无论验证成功还是失败, 都只能使用一次
-      ctx.session.captcha = null;
+      ctx.session.email = null;
       throw new Error('验证码不正确');
     }
     // 注意点: 验证码无论验证成功还是失败, 都只能使用一次
-    ctx.session.captcha = null;
+    ctx.session.email = null;
   },
 };
