@@ -29,7 +29,7 @@ export default {
       // 3.保存验证码
     ctx.session.email = {
       code,
-      expire: Date.now() + 60 * 1000, // 验证码1分钟之后过期
+      expire: Date.now() + 60 * 8000, // 验证码1分钟之后过期
     };
     return info;
   },
